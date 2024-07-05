@@ -1,0 +1,42 @@
+.reviewsContainer {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .reviews {
+    flex: 1;
+  }
+  
+  .review {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #F2F4F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #E44848;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .avatar {
+      font-size: 24px;
+    }
+  }
+  
+  .reviewContent {
+    flex: 1;
+  }
+  
+  .formContainer {
+    width: 300px;
+  }
+  

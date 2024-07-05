@@ -1,0 +1,23 @@
+.wrap {
+    display: flex;
+    gap: 10px;
+}
+
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 300px;
+  height: 200px;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.features p {
+  margin: 0;
+}
+
+.details {
+  display: flex;
+}
