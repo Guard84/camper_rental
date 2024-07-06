@@ -4,7 +4,6 @@ import svgr from 'vite-plugin-svgr';
 
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: '/camper_rental/',
   build: {
     sourcemap: true,
   },
