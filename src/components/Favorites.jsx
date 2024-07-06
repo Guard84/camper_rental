@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { selectFavorites } from '../redux/selectors';
-import Card from '../components/Card';
+import Card from './Card/Card';
 
 const Favorites = () => {
   const favorites = useSelector(selectFavorites);

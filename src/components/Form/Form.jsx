@@ -1,9 +1,9 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import Button from "../Button";
+import Button from "../Button/Button";
 import { FormValidationSchema } from "../../schema/FormValidationSchema";
-import css from './Form.module.css';
+import css from "./Form.module.css";
 
 const Form = () => {
   const {

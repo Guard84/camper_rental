@@ -1,27 +1,24 @@
-import { useEffect } from 'react';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import css from './Modal.module.css';
-import Features from '../Features/Features';
-import Reviews from '../Reviews/Reviews';
+import { useEffect } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import css from "./Modal.module.css";
+import Features from "../Features/Features";
+import Reviews from "../Reviews/Reviews";
 
 const Modal = ({ isOpen, onClose, ad }) => {
-  const navigate = useNavigate();
-
   useEffect(() => {
     const handleEsc = (event) => {
-      if (event.key === 'Escape') {
+      if (event.key === "Escape") {
         onClose();
       }
     };
-    document.addEventListener('keydown', handleEsc);
+    document.addEventListener("keydown", handleEsc);
     return () => {
-      document.removeEventListener('keydown', handleEsc);
+      document.removeEventListener("keydown", handleEsc);
     };
   }, [onClose]);
 
   const closeModal = () => {
     onClose();
-    navigate(-1); // Go back to the previous route when closing modal
   };
 
   if (!isOpen) return null;
@@ -29,7 +26,9 @@ const Modal = ({ isOpen, onClose, ad }) => {
   return (
     <div className={css.modalBackdrop} onClick={closeModal}>
       <div className={css.modalContent} onClick={(e) => e.stopPropagation()}>
-        <button className={css.modalClose} onClick={closeModal}>×</button>
+        <button className={css.modalClose} onClick={closeModal}>
+          ×
+        </button>
         <h2>{ad.name}</h2>
         <div className={css.gallery}>
           {ad.gallery.map((image, index) => (
@@ -49,7 +48,10 @@ const Modal = ({ isOpen, onClose, ad }) => {
         </div>
         <Routes>
           <Route path={`${ad._id}/features`} element={<Features ad={ad} />} />
-          <Route path={`${ad._id}/reviews`} element={<Reviews reviews={ad.reviews} />} />
+          <Route
+            path={`${ad._id}/reviews`}
+            element={<Reviews reviews={ad.reviews} />}
+          />
         </Routes>
       </div>
     </div>
