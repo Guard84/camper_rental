@@ -14,9 +14,9 @@ const Card = ({ ad }) => {
 
   const toggleFavorite = () => {
     if (favorite) {
-      dispatch(removeFavorite(ad?._id));
+      dispatch(removeFavorite(ad));
     } else {
-      dispatch(addFavorite(ad?._id));
+      dispatch(addFavorite(ad));
     }
   };
 
