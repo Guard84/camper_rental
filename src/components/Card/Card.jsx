@@ -4,18 +4,19 @@ import { addFavorite, removeFavorite } from "../../redux/slice";
 import { isFavorite } from "../../redux/selectors";
 import Button from "../Button/Button";
 import Modal from "../Modal/Modal";
+import HeartIcon from "../../assets/heart.svg";
 import css from "./Card.module.css";
 
 const Card = ({ ad }) => {
   const dispatch = useDispatch();
-  const favorite = useSelector((state) => isFavorite(state, ad._id));
+  const favorite = useSelector((state) => isFavorite(state, ad?._id));
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleFavorite = () => {
     if (favorite) {
-      dispatch(removeFavorite(ad));
+      dispatch(removeFavorite(ad?._id));
     } else {
-      dispatch(addFavorite(ad));
+      dispatch(addFavorite(ad?._id));
     }
   };
 
@@ -29,16 +30,25 @@ const Card = ({ ad }) => {
     setIsModalOpen(false);
   };
 
+  if (!ad || !ad.gallery || ad.gallery.length === 0) {
+    return null;
+  }
+
   return (
     <div className={css.wrap}>
-    
-        <img src={ad.gallery[0]} alt="First Image" className={css.image} />
-     
+      <img src={ad.gallery[0]} alt="First Image" className={css.image} />
       <div className={css.infoWrap}>
         <div>
           <div className={css.headerWrap}>
             <h2 className={css.cardTitle}>{ad.name}</h2>
-            <p className={css.cardPrice}>€ {ad.price.toFixed(2)}</p>
+            <div className={css.favoriteAction} onClick={toggleFavorite}>
+              <p className={css.cardPrice}>€ {ad.price.toFixed(2)}</p>
+              <img
+                src={HeartIcon}
+                alt="Favorite Icon"
+                className={favorite ? css.favoriteIconActive : css.favoriteIcon}
+              />
+            </div>
           </div>
           <div className={css.ratingWrap}>
             <p className={css.cardRating}>
@@ -60,16 +70,9 @@ const Card = ({ ad }) => {
           {ad.details.kitchen && <p className={css.cardDetails}>Kitchen</p>}
           <p className={css.cardDetails}>{ad.details.beds} beds</p>
         </div>
+
         <div>
-        <button className={css.btnFavorite}
-          onClick={toggleFavorite}
-          style={{ color: favorite ? "red" : "black" }}
-        >
-          {favorite ? "Remove from Favorites" : "Add to Favorites"}
-        </button>
-        </div>
-        <div>
-        <Button onClick={openModal}>Show more</Button>
+          <Button onClick={openModal}>Show more</Button>
         </div>
         <Modal isOpen={isModalOpen} onClose={closeModal} ad={ad} />
       </div>

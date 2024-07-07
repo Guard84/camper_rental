@@ -14,19 +14,21 @@ const Reviews = ({ reviews }) => (
   <div className={css.reviewsContainer}>
     <div className={css.reviews}>
       {reviews.map((review, index) => (
-        <div key={index} className={css.review}>
+        <div key={index}>
+          <div className={css.reviewHeader}>
           {getInitialsCircle(review.reviewer_name)}
+          <div className={css.reviewRating}>
+          <h3 className={css.reviewName}>{review.reviewer_name}</h3>
+          <p>{review.reviewer_rating}</p>
+          </div>
+          </div>
           <div className={css.reviewContent}>
-            <h3>{review.reviewer_name}</h3>
-            <p>{review.reviewer_rating}</p>
             <p>{review.comment}</p>
           </div>
         </div>
       ))}
     </div>
-    <div className={css.formContainer}>
-      <Form />
-    </div>
+    <Form />
   </div>
 );
 

@@ -1,0 +1,16 @@
+@media screen and (min-width: 768px) {
+  .infoWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex-shrink: 0;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .wrap {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+  }
+}

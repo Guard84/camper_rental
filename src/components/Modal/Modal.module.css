@@ -26,7 +26,7 @@
 
 @media screen and (min-width: 768px) {
   .modalContent {
-    padding: 30px;
+    padding: 40px;
     border-radius: 20px;
     width: auto;
     height: auto;
@@ -35,7 +35,6 @@
 
 @media screen and (min-width: 1024px) {
   .modalContent {
-    height: 720px;
     width: auto;
     padding: 40px;
   }
@@ -43,18 +42,21 @@
 
 .modalClose {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 40px;
+  right: 40px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 32px;
   cursor: pointer;
+  padding: 0;
+  line-height: 0.5;
 }
 
 .gallery {
   display: flex;
   gap: 16px;
   justify-content: space-around;
+  margin-bottom: 24px;
 }
 
 .gallery img {
@@ -78,4 +80,69 @@
     height: 310px;
     border-radius: 10px;
   }
+}
+
+.modalTitle {
+  margin-bottom: 10px;
+}
+
+.modalRating {
+  color: #101828;
+  text-decoration: underline;
+}
+
+.modalLocation {
+  margin-bottom: 16px;
+  color: #101828;
+}
+
+.modalPrice {
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #101828;
+  line-height: 1.5;
+}
+
+.modalDescr {
+  margin-bottom: 44px;
+}
+
+@media screen and (min-width: 768px) {
+  .ratingCont {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+.tabs {
+  display: flex;
+  justify-content: start;
+  gap: 40px;
+  border-bottom: 1px solid rgba(16, 24, 40, 0.20);;
+}
+
+.tabs a {
+  text-decoration: none;
+  color: #101828;
+  position: relative;
+  padding-bottom: 24px;
+  font-size: 20px;
+font-weight: 600;
+line-height: 1.2;
+}
+
+.tabs a.activeTab::after {
+  content: "";
+  display: block;
+  width: 85px;
+  height: 5px;
+  background-color :#E44848;
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+}
+
+.tabs a.inactiveTab {
+  color: #101828;
 }

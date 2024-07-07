@@ -1,8 +1,10 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-import Button from "../Button/Button";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { FormValidationSchema } from "../../schema/FormValidationSchema";
+import { AiOutlineCalendar } from "react-icons/ai";
 import css from "./Form.module.css";
 
 const Form = () => {
@@ -22,53 +24,85 @@ const Form = () => {
       reset();
       window.location.reload();
     } catch (error) {
-      console.error("Помилка при обробці форми:", error);
+      console.error("Error:", error);
     }
   };
 
   return (
     <form className={css.form} onSubmit={handleSubmit(onSubmitHandler)}>
-      <label>
-        Name:
+      <h2 className={css.formTitle}>Book your campervan now</h2>
+      <p className={css.formDescr}>
+        Stay connected! We are always ready to help you.
+      </p>
+      <label className={css.label}>
         <Controller
           name="name"
           control={control}
           defaultValue=""
-          render={({ field }) => <input type="text" {...field} />}
+          render={({ field }) => (
+            <input
+              className={css.formInput}
+              type="text"
+              {...field}
+              placeholder="Name"
+            />
+          )}
         />
         {errors.name && <span>{errors.name.message}</span>}
       </label>
-      <label>
-        Email:
+      <label className={css.label}>
         <Controller
           name="email"
           control={control}
           defaultValue=""
-          render={({ field }) => <input type="email" {...field} />}
+          render={({ field }) => (
+            <input
+              className={css.formInput}
+              type="email"
+              {...field}
+              placeholder="Email"
+            />
+          )}
         />
         {errors.email && <span>{errors.email.message}</span>}
       </label>
-      <label>
-        Booking Date:
+      <label className={css.label}>
         <Controller
           name="bookingDate"
           control={control}
-          defaultValue=""
-          render={({ field }) => <input type="date" {...field} />}
+          defaultValue={null}
+          render={({ field }) => (
+            <div className={css.datePickerWrapper}>
+              <DatePicker
+                className={css.formInput}
+                selected={field.value}
+                onChange={(date) => field.onChange(date)}
+                placeholderText="Booking date"
+                dateFormat="dd/MM/yyyy"
+              />
+              <AiOutlineCalendar className={css.calendarIcon} />
+            </div>
+          )}
         />
         {errors.bookingDate && <span>{errors.bookingDate.message}</span>}
       </label>
-      <label>
-        Comment:
+      <label className={css.label}>
         <Controller
           name="comment"
           control={control}
           defaultValue=""
-          render={({ field }) => <textarea {...field} />}
+          render={({ field }) => (
+            <textarea
+              className={css.formTextArea}
+              {...field}
+              placeholder="Comment"
+            />
+          )}
         />
-        {errors.comment && <span>{errors.comment.message}</span>}
       </label>
-      <Button type="submit">Submit</Button>
+      <button className={css.formBtn} type="submit">
+        Send
+      </button>
     </form>
   );
 };

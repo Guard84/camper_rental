@@ -5,7 +5,7 @@ import { selectAllAds } from '../../redux/selectors';
 import Card from '../Card/Card';
 import Modal from '../Modal/Modal';
 import Filter from '../Filter/Filter';
-import css from './Catalog.module.css'
+import css from './Catalog.module.css';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const Catalog = () => {
     type: '',
   });
   const [filteredAds, setFilteredAds] = useState([]);
+  const [showNoResults, setShowNoResults] = useState(false);
 
   useEffect(() => {
     if (adStatus === 'idle') {
@@ -44,6 +45,8 @@ const Catalog = () => {
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
+    setShowNoResults(false);
+    setFilteredAds(ads);
   };
 
   const handleSearch = () => {
@@ -55,6 +58,7 @@ const Catalog = () => {
       );
     });
     setFilteredAds(result);
+    setShowNoResults(result.length === 0);
   };
 
   return (
@@ -63,15 +67,19 @@ const Catalog = () => {
         <Filter filters={filters} onFilterChange={handleFilterChange} onSearch={handleSearch} />
       </div>
       <div className={css.cards}>
-        {filteredAds.map((ad) => (
-          <Card key={ad._id} ad={ad} onClick={() => handleCardClick(ad)} />
-        ))}
+        {filteredAds.length > 0 ? (
+          filteredAds.map((ad) => (
+            <Card key={ad._id} ad={ad} onClick={() => handleCardClick(ad)} />
+          ))
+        ) : showNoResults ? (
+          <p>No ads found for the selected location.</p>
+        ) : null}
         {adStatus === 'loading' && <p>Loading...</p>}
         {adStatus === 'failed' && <p>Error: {error}</p>}
-        {adStatus !== 'loading' && filteredAds.length % 4 === 0 && (
+        {adStatus !== 'loading' && filteredAds.length % 4 === 0 && filteredAds.length > 0 && (
           <button className={css.btnLoadMore} onClick={loadMore}>Load more</button>
         )}
-        {adStatus !== 'loading' && filteredAds.length % 4 !== 0 && (
+        {adStatus !== 'loading' && filteredAds.length % 4 !== 0 && filteredAds.length > 0 && (
           <p>End of catalog.</p>
         )}
         {selectedAd && (
@@ -80,7 +88,6 @@ const Catalog = () => {
       </div>
     </div>
   );
-  
 };
 
 export default Catalog;
