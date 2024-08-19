@@ -66,6 +66,7 @@ const Card = ({ ad }) => {
                     strokeWidth="2.3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    className={favorite ? css.heartPathActive : css.heartPath}
                   />
                 </g>
                 <defs>
